@@ -201,4 +201,50 @@ def handle_message(message):
 
 
 
+
+#---------------------------------------------------------------------------------------------
+
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+s = Service(executable_path='chromedriver.exe')
+driver = webdriver.Chrome(service=s)
+
+try:
+    driver.maximize_window()
+    driver.get('https://www.vfsglobal.com/visa-at-your-doorstep/')
+    time.sleep(2)
+
+    driver.find_element(By.CLASS_NAME, 'icon-arrow-point-down').click()
+    time.sleep(0.5)
+
+    driver.find_element(By.XPATH, '//*[@id="resident_country_dropdown"]/div[4]/ul/li/div/ul/li[18]/span').click()
+    time.sleep(0.5)
+
+    driver.find_element(By.XPATH, '//*[@id="visiting_country_dropdown"]/div[3]/div/i').click()
+    time.sleep(0.5)
+
+    driver.find_element(By.XPATH, '//*[@id="visiting_country_dropdown"]/div[4]/ul/li/div/ul/li[11]/span').click()
+    time.sleep(0.5)
+
+    driver.find_element(By.XPATH, '//*[@id="content"]/div/div[2]/div/div/div/div/div/div/div/div[2]/div/div[1]/div[5]/div[3]/div/span').click()
+    time.sleep(10)
+
+    name = driver.find_element(By.CLASS_NAME, 'col-sm-9')
+    name.send_keys('Максим Жидких')
+    time.sleep(10)
+
+
+
+except Exception as ex:
+    print(ex)
+finally:
+    driver.close()
+    driver.quit()
+
+
+
+
 bot.polling(none_stop=True)
